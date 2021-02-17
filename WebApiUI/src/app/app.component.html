@@ -1,0 +1,35 @@
+<div class="app" >
+  <header class="bg-white border-bottom box-shadow mb-3">
+    <div class="brand">
+      <img src="assets/img/logo.png">
+    </div>
+    <div class="name">Admin System</div>
+    <div class="functions">
+      <button id="logout" class="btn btn-primary" ><i class="fas fa-sign-out-alt"></i>Logout</button>
+    </div>
+  </header>
+  <nav>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a id="menuHome" class="nav-link" routerLink="/" routerLinkActive="active">
+          <i class="fas fa-home"></i>Home</a>
+        <a id="menuDashboard"  class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+          <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+        <!-- <a class="nav-link" routerLink="/users" routerLinkActive="active"><i class="fas fa-address-card"></i>Users</a> -->
+        <!-- <a class="nav-link" routerLink="/reviewrules" routerLinkActive="active"><i class="fas fa-address-card"></i>Review Rules</a> -->
+        <!-- <a id="menuFacilities" class="nav-link" routerLink="/facilities" routerLinkActive="active"><i
+            class="fas fa-clinic-medical"></i>Facilities</a> -->
+        <a id="menuNotifications" class="nav-link" routerLink="/notification-settings" routerLinkActive="active"><i
+            class="fas fa-flag"></i>Notification Settings</a>
+        <a id="menuRegistrations" class="nav-link" routerLink="/registrations" routerLinkActive="active"><i
+            class="fas fa-stream"></i>Registrations</a>
+        <a id="menuAbout" class="nav-link" routerLink="/about" routerLinkActive="active"><i
+            class="fas fa-question-circle"></i>About</a>
+      </li>
+    </ul>
+  </nav>
+  <peg-loader></peg-loader>
+  <main role="main">
+    <router-outlet></router-outlet>
+  </main>
+</div>

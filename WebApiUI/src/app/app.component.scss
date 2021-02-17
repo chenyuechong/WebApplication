@@ -1,0 +1,93 @@
+@import "../styles/variables.scss";
+$spacer: 1rem;
+$sidebar-width: 220px;
+$header-height: 75px;
+
+.app {
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        height: $header-height;
+        align-items: center;
+        z-index: 2000;
+
+        .brand {
+            flex-shrink: 0;
+
+            img {
+                height: 70px;
+                padding: 0 $spacer;
+            }
+        }
+
+        .name {
+            font-size: 150%;
+            flex-shrink: 0;
+        }
+
+        .functions {
+            padding: $spacer;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+    }
+
+    nav {
+        position: fixed;
+        top: $header-height;
+        bottom: 0;
+        left: 0;
+        width: $sidebar-width;
+        z-index: 100;
+        padding: $spacer 0.5 * $spacer;
+        background-color: $color-navy;
+        color: $color-grey;
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+
+        .nav-link {
+            color: $color-grey;
+            font-size: 14px;
+
+            i {
+                width: 46px;
+            }
+
+            &:hover {
+                opacity: 0.85;
+            }
+        }
+
+        .active {
+            color: $color-yellow;
+        }
+    }
+
+    main {
+        background-color: $color-grey;
+        margin: $header-height 0 0 $sidebar-width;
+        padding: $spacer 2 * $spacer;
+        height: 100%;
+    }
+
+    .summary-panel {
+      /* text-align: center; */
+      width: 100%;
+      padding: 10px;
+      margin-left: 14px;
+    }
+    a {
+      color: $color-white;
+    }
+
+    .filter-button {
+      margin-left: 10px;
+    }
+
+    .btn-group {
+      display: block;
+      margin: 0 auto;
+    }
+}
