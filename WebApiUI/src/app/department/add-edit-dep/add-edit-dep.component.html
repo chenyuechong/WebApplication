@@ -5,6 +5,8 @@
         placeholder="Enter Department Name">
     </div>
 </div>
-
-<button (click)="addDepartment()" *ngIf="dep.DepartmentId==0" class="btn btn-primary">Add</button>
-<button (click)="updateDepartment()" *ngIf="dep.DepartmentId!=0" class="btn btn-primary">Update</button>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button (click)="addDepartment()" *ngIf="dep.DepartmentId==0" class="btn btn-primary">Add</button>
+    <button (click)="updateDepartment()" *ngIf="dep.DepartmentId!=0" class="btn btn-primary">Update</button>
+  </div>

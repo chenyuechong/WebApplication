@@ -22,7 +22,7 @@ readonly PhotoUrl = "https://localhost:44397/Photos/"
     return this.http.put(this.APIUrl+'Department', val);
   }
   deleteDepartment(val:any){
-    return this.http.delete(this.APIUrl+'Department', val);
+    return this.http.delete(this.APIUrl+'Department/'+ val);
   }
   getEmpList():Observable<any[]>
   {
@@ -36,7 +36,7 @@ readonly PhotoUrl = "https://localhost:44397/Photos/"
     return this.http.put(this.APIUrl+'Employee', val);
   }
   deleteEmployee(val:any){
-    return this.http.delete(this.APIUrl+'Employee', val);
+    return this.http.delete(this.APIUrl+'Employee/'+ val);
   }
 
 

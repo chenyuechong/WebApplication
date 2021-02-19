@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SharedService } from 'src/app/shared.service';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-add-edit-dep',
   templateUrl: './add-edit-dep.component.html',
@@ -21,7 +23,17 @@ export class AddEditDepComponent implements OnInit {
     var val={DepartmentId:this.DepartmentId,
              DepartmentName:this.DepartmentName};
     this.service.addDepartment(val).subscribe(
-      res=>alert(res.toString()));
+      res=>{
+        if(res == "Create Successfully")
+        {
+          Swal.fire({
+            icon: 'success',
+            title: 'New Department has been Created',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      });
 
   }
 

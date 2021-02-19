@@ -96,11 +96,11 @@ namespace WebAPI.Controllers
 
         }
 
-        [HttpDelete]
-        public JsonResult Delete(Department dep)
+        [HttpDelete("{id}")]
+        public JsonResult Delete(int Id)
         {
             string query = @"delete from dbo.Department 
-                             where DepartmentId = '" + dep.DepartmentId + @"'
+                             where DepartmentId = '" + Id + @"'
                              ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
