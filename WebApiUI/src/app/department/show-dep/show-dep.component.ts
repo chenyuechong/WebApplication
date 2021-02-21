@@ -15,6 +15,9 @@ export class ShowDepComponent implements OnInit {
   ActivateAddEditDepComp:boolean = false;
   dep:any;
 
+  DepartmentIdFilter:string="";
+  DepartmentNameFilter:string="";
+  DepartmentWithoutFilter:any=[];
   ngOnInit(): void {
     this.refreshDepList();
   }
@@ -27,6 +30,7 @@ export class ShowDepComponent implements OnInit {
       }
       this.ActivateAddEditDepComp = true;
       this.ModalTitle="Add Department";
+      this.refreshDepList();
   }
 
   closeClick(){
@@ -39,6 +43,7 @@ export class ShowDepComponent implements OnInit {
     this.dep = item;
     this.ModalTitle = "Edit Department";
     this.ActivateAddEditDepComp = true;
+    this.refreshDepList();
   }
 
   deleteClick(item:any)
@@ -57,6 +62,34 @@ export class ShowDepComponent implements OnInit {
   refreshDepList(){
     this.service.getDepList().subscribe(data=>{
       this.DepartmentList = data;
+      this.DepartmentWithoutFilter = data;
     })
+  }
+
+
+  FilterFn(){
+    var DepartmentIdFilter = this.DepartmentIdFilter;
+    var DepartmentNameFilter = this.DepartmentNameFilter;
+
+    this.DepartmentList = this.DepartmentWithoutFilter.filter(function(el:any){
+      return el.DepartmentId.toString().toLowerCase().includes(
+        DepartmentIdFilter.toString().trim().toLowerCase())&&
+        el.DepartmentName.toString().toLowerCase().includes(
+          DepartmentNameFilter.toString().trim().toLowerCase()
+      )
+    });
+  }
+
+  sortResult(prop:any,asc:boolean)
+  {
+    this.DepartmentList = this.DepartmentWithoutFilter.sort(function(a:any, b:any){
+      if(asc)
+      {
+        return ((a[prop]>b[prop])?1:((a[prop]<b[prop])?-1:0));
+      }else{
+        return ((b[prop]>a[prop])?1:((b[prop]<a[prop])?-1:0));;
+      }
+    })
+
   }
 }
