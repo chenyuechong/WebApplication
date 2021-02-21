@@ -1,0 +1,47 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { SharedService } from 'src/app/shared.service';
+import Swal from 'sweetalert2';
+
+@Component({
+  selector: 'app-add-edit-dep',
+  templateUrl: './add-edit-dep.component.html',
+  styleUrls: ['./add-edit-dep.component.scss']
+})
+export class AddEditDepComponent implements OnInit {
+
+  constructor(private service:SharedService) { }
+
+  @Input() dep:any;
+  DepartmentId:string="";
+  DepartmentName:string="";
+
+  ngOnInit(): void {
+    this.DepartmentId = this.dep.DepartmentId;
+    this.DepartmentName = this.dep.DepartmentName;
+  }
+  addDepartment(){
+    var val={DepartmentId:this.DepartmentId,
+             DepartmentName:this.DepartmentName};
+    this.service.addDepartment(val).subscribe(
+      res=>{
+        if(res == "Create Successfully")
+        {
+          Swal.fire({
+            icon: 'success',
+            title: 'New Department has been Created',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      });
+
+  }
+
+  updateDepartment(){
+    var val={DepartmentId:this.DepartmentId,
+             DepartmentName:this.DepartmentName};
+    this.service.updateDepartment(val).subscribe(
+      res=>alert(res.toString()));;
+  }
+
+}
