@@ -10,6 +10,9 @@ export class ShowEmpComponent implements OnInit {
   constructor(private service:SharedService) { }
   EmployeeList:any=[];
 
+  page:number = 1;
+  pageSize:number = 3;
+  
   ModalTitle:string="";
   ActivateAddEditEmpComp:boolean = false;
   emp:any;
