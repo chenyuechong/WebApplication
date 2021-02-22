@@ -14,6 +14,9 @@ export class ShowDepComponent implements OnInit {
   ModalTitle:string="";
   ActivateAddEditDepComp:boolean = false;
   dep:any;
+  page:number = 1;
+  pageSize:number = 3;
+
 
   DepartmentIdFilter:string="";
   DepartmentNameFilter:string="";
@@ -63,6 +66,7 @@ export class ShowDepComponent implements OnInit {
     this.service.getDepList().subscribe(data=>{
       this.DepartmentList = data;
       this.DepartmentWithoutFilter = data;
+      //this.page = Math.ceil(this.DepartmentWithoutFilter.length/5);
     })
   }
 
@@ -90,6 +94,5 @@ export class ShowDepComponent implements OnInit {
         return ((b[prop]>a[prop])?1:((b[prop]<a[prop])?-1:0));;
       }
     })
-
   }
 }

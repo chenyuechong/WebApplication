@@ -73,7 +73,7 @@ data-backdrop="static" data-keyboard="false">Add Department
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of DepartmentList">
+        <tr *ngFor="let item of DepartmentList |paginate: { itemsPerPage: pageSize, currentPage: page }">
             <td>{{item.DepartmentId}}</td>
             <td>{{item.DepartmentName}}</td>
             <td>
@@ -92,5 +92,6 @@ data-backdrop="static" data-keyboard="false">
                 </button>
             </td>
         </tr>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>   
     </tbody>
 </table>
