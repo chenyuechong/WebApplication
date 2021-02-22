@@ -54,7 +54,7 @@ export class AddEditEmpComponent implements OnInit {
         {
           Swal.fire({
             icon: 'success',
-            title: 'New Department has been Created',
+            title: 'New Employee has been Created',
             showConfirmButton: false,
             timer: 1500
           })
