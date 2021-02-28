@@ -8,29 +8,21 @@
       <button id="logout" class="btn btn-primary">
         <i class="fas fa-sign-out-alt"></i>Logout</button>
     </div>
-  </header>
+  </header>home
   <nav>
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a id="menuHome" class="nav-link">
+        <a id="menuHome" class="nav-link" routerLink="/home" routerLinkActive="active">
           <i class="fas fa-home"></i>Home</a>
       </li>
       <li class="nav-item">
-        <a id="menuDashboard" class="nav-link" routerLink="/employee" routerLinkActive="active">
-          <i class="fas fa-tachometer-alt"></i>Employee</a>
+        <a id="menuEmployee" class="nav-link" routerLink="/employee" routerLinkActive="active">
+          <i class="fas fa-flag"></i>Employee</a>
       </li>
       <li class="nav-item">
-      <a id="menuNotifications" class="nav-link" routerLink="/department" routerLinkActive="active">
+      <a id="menuNotiDepartment" class="nav-link" routerLink="/department" routerLinkActive="active">
         <i class="fas fa-flag"></i>Department</a>
       </li>
-      <!-- <li class="nav-item">
-        <a id="menuRegistrations" class="nav-link">
-          <i class="fas fa-stream"></i>Registrations</a>
-      </li>
-      <li class="nav-item">
-        <a id="menuAbout" class="nav-link" routerLink="/about" routerLinkActive="active">
-          <i class="fas fa-question-circle"></i>About</a>
-      </li> -->
     </ul>
   </nav>
   <main role="main">

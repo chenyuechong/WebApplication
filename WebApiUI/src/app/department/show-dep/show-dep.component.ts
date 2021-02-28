@@ -15,7 +15,7 @@ export class ShowDepComponent implements OnInit {
   ActivateAddEditDepComp:boolean = false;
   dep:any;
   page:number = 1;
-  pageSize:number = 3;
+  pageSize:number = 10;
 
 
   DepartmentIdFilter:string="";

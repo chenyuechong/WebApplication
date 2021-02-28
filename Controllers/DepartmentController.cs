@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.DB;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -16,55 +17,26 @@ namespace WebAPI.Controllers
     public class DepartmentController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-
+        private readonly DBOperate db;
         public DepartmentController(IConfiguration configuration)
         {
             _configuration = configuration;
+            db = new DBOperate(_configuration);
         }
 
         [HttpGet]
         public JsonResult Get()
         {
             string query = @"select DepartmentId, DepartmentName from dbo.Department";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-
-            return new JsonResult(table);
+            
+            return new JsonResult(db.excuteSQL(query));
         }
 
         [HttpPost]
         public JsonResult Post(Department dep)
         {
             string query = @"insert into dbo.Department values('"+ dep.DepartmentName +@"')";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-
+            db.excuteSQL(query);
             return new JsonResult("Create Successfully");
 
         }
@@ -76,21 +48,7 @@ namespace WebAPI.Controllers
                              DepartmentName ='" + dep.DepartmentName +@"'
                              where DepartmentId = '" + dep.DepartmentId +@"'
                              ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
+            db.excuteSQL(query);
 
             return new JsonResult("Update Successfully");
 
@@ -102,21 +60,7 @@ namespace WebAPI.Controllers
             string query = @"delete from dbo.Department 
                              where DepartmentId = '" + Id + @"'
                              ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
+            db.excuteSQL(query);
 
             return new JsonResult("Delete Successfully");
         }

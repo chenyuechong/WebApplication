@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.DB;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -20,10 +21,12 @@ namespace WebAPI.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
+        private readonly DBOperate db;
         public EmployeeController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _env = env;
+            db = new DBOperate(_configuration);
         }
 
         [HttpGet]
@@ -31,23 +34,9 @@ namespace WebAPI.Controllers
         {
             string query = @"select EmployeeId, EmployeeName, Department,
                             convert(varchar(10),DateOfJoining,120) as DateOfJoining,PhotoFileName from dbo.Employee";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
+            
 
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-
-            return new JsonResult(table);
+            return new JsonResult(db.excuteSQL(query));
         }
 
         [HttpPost]
@@ -64,21 +53,7 @@ namespace WebAPI.Controllers
                         ,'" + emp.PhotoFileName + @"'
                         )
                         ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
+            db.excuteSQL(query);
 
             return new JsonResult("Create Successfully");
 
@@ -93,21 +68,7 @@ namespace WebAPI.Controllers
                              ,DateOfJoining ='" + emp.DateOfJoining + @"'
                              where EmployeeId = '" + emp.EmployeeId + @"'
                              ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
+            db.excuteSQL(query);
 
             return new JsonResult("Update Successfully");
 
@@ -119,21 +80,7 @@ namespace WebAPI.Controllers
             string query = @"delete from dbo.Employee 
                              where EmployeeId = '" + Id + @"'
                              ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
+            db.excuteSQL(query);
 
             return new JsonResult("Delete Successfully");
         }
@@ -165,23 +112,11 @@ namespace WebAPI.Controllers
         public JsonResult GetAllDepartmentNames()
         {
             string query = @"select DepartmentName from dbo.Department";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
+            
 
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-
-            return new JsonResult(table);
+            return new JsonResult(db.excuteSQL(query));
         }
+
+
     }
 }

@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AddEditDepComponent,
     EmployeeComponent,
     ShowEmpComponent,
-    AddEditEmpComponent
+    AddEditEmpComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
