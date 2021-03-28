@@ -19,12 +19,12 @@ namespace WebAPI.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
-        private DBOperate db;
+        private PetitionDBOperate db;
         public PetitionsController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _env = env;
-            db = new DBOperate(_configuration);
+            db = new PetitionDBOperate(_configuration);
         }
 
         [HttpGet]
