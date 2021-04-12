@@ -5,8 +5,8 @@
     </div>
     <div class="name">Admin System</div>
     <div class="functions">
-      <button id="logout" class="btn btn-primary">
-        <i class="fas fa-sign-out-alt"></i>Logout</button>
+      <a role="button" class="btn btn-primary" routerLink="/login" routerLinkActive="active">Login</a>
+      <a role="button" class="btn btn-primary" style="margin-left:1em" routerLink="/register" routerLinkActive="active">Register</a>
     </div>
   </header>home
   <nav>
@@ -23,6 +23,14 @@
       <a id="menuNotiDepartment" class="nav-link" routerLink="/department" routerLinkActive="active">
         <i class="fas fa-flag"></i>Department</a>
       </li>
+      <li class="nav-item">
+        <a id="menuNotiPetition" class="nav-link" routerLink="/petitions" routerLinkActive="active">
+          <i class="fas fa-flag"></i>Petitions</a>
+        </li>
+        <li class="nav-item">
+          <a id="menuNoticategory" class="nav-link" routerLink="/category" routerLinkActive="active">
+            <i class="fas fa-flag"></i>Category</a>
+          </li>
     </ul>
   </nav>
   <main role="main">

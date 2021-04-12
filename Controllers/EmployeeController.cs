@@ -40,8 +40,7 @@ namespace WebAPI.Controllers
 
         [HttpPost]
         public JsonResult Post(Employee emp)
-        {
-            
+        {           
             string query = @"insert into dbo.Employee 
                         (EmployeeName,Department,DateOfJoining,PhotoFileName)
                         values

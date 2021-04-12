@@ -30,7 +30,12 @@ namespace WebAPI.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = "";
+            string query = @"select petition.petition_id as petitionId, petition.title, categorys.name as category, users.name as authorName,count(*)as SignatureCount
+                        from petition join categorys on petition.category_id = categorys.category_id
+                         join users on petition.author_id = users.user_id 
+                         join Signature on Petition.petition_id = Signature.petition_id
+	                     group by Petition.petition_id, title,categorys.name,users.name
+	                	 order by title ASC;";
             return new JsonResult(db.excuteSQL(query));
         }
         
@@ -44,8 +49,7 @@ namespace WebAPI.Controllers
                             ,'" + petition.description + @"'
                             ,'" + petition.categoryId + @"'
                             ,'" + new System.DateTime() + @"'
-                            ,'" + petition.closingDate + @"'
-                            
+                            ,'" + petition.closingDate + @"'                           
                             )
                             ";
             return new JsonResult(db.excuteSQL(query));
@@ -56,23 +60,7 @@ namespace WebAPI.Controllers
         public JsonResult categories()
         {
             string query = @"select category_Id as categoryId,name from dbo.category";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
-            {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader);
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-
-            return new JsonResult(table);
+            return new JsonResult(db.excuteSQL(query));
         }
 
         [HttpDelete("{id}")]

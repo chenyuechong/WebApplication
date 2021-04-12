@@ -17,6 +17,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { HomeComponent } from './home/home.component';
 
+import { LoginComponent } from './login/login.component';
+import { PetitionsComponent } from './petitions/petitions.component';
+import { CategoryComponent } from './category/category.component';
+import { RegisterComponent } from './register/register.component';
+import { ShowPetitionComponent } from './petitions/show-petition/show-petition.component';
+import { AddPetitionComponent } from './petitions/add-petition/add-petition.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +32,13 @@ import { HomeComponent } from './home/home.component';
     EmployeeComponent,
     ShowEmpComponent,
     AddEditEmpComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    PetitionsComponent,
+    CategoryComponent,
+    RegisterComponent,
+    ShowPetitionComponent,
+    AddPetitionComponent
   ],
   imports: [
     BrowserModule,
